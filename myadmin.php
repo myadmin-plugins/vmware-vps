@@ -15,10 +15,10 @@ return [
 	'version' => '1.0.0',
 	'type' => 'licenses',
 	'hooks' => [
-		'function.requirements' => ['Detain\MyAdminVmware\Plugin', 'Requirements'],
+		/*'function.requirements' => ['Detain\MyAdminVmware\Plugin', 'Requirements'],
 		'licenses.settings' => ['Detain\MyAdminVmware\Plugin', 'Settings'],
 		'licenses.activate' => ['Detain\MyAdminVmware\Plugin', 'Activate'],
 		'licenses.change_ip' => ['Detain\MyAdminVmware\Plugin', 'ChangeIp'],
-		'ui.menu' => ['Detain\MyAdminVmware\Plugin', 'Menu']
+		'ui.menu' => ['Detain\MyAdminVmware\Plugin', 'Menu'] */
 	],
 ];
