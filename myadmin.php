@@ -15,8 +15,8 @@ return [
 	'version' => '1.0.0',
 	'type' => 'service',
 	'hooks' => [
-		/*'function.requirements' => ['Detain\MyAdminVmware\Plugin', 'Requirements'],
 		'vps.settings' => ['Detain\MyAdminVmware\Plugin', 'Settings'],
+		/*'function.requirements' => ['Detain\MyAdminVmware\Plugin', 'Requirements'],
 		'vps.activate' => ['Detain\MyAdminVmware\Plugin', 'Activate'],
 		'vps.change_ip' => ['Detain\MyAdminVmware\Plugin', 'ChangeIp'],
 		'ui.menu' => ['Detain\MyAdminVmware\Plugin', 'Menu'] */
