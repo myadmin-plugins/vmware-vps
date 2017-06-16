@@ -7,7 +7,20 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 class Plugin {
 
+	public static $name = 'Vmware Vps';
+	public static $description = 'Allows selling of Vmware Server and VPS License Types.  More info at https://www.netenberg.com/vmware.php';
+	public static $help = 'It provides more than one million end users the ability to quickly install dozens of the leading open source content management systems into their web space.  	Must have a pre-existing cPanel license with cPanelDirect to purchase a vmware license. Allow 10 minutes for activation.';
+	public static $module = 'vps';
+	public static $type = 'service';
+
+
 	public function __construct() {
+	}
+
+	public static function Hooks() {
+		return [
+			'vps.settings' => ['Detain\MyAdminVmware\Plugin', 'Settings'],
+		];
 	}
 
 	public static function Activate(GenericEvent $event) {
