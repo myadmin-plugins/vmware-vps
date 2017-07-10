@@ -20,22 +20,21 @@ class Plugin {
 	public static function getHooks() {
 		return [
 			self::$module.'.settings' => [__CLASS__, 'getSettings'],
+			//self::$module.'.activate' => [__CLASS__, 'getActivate'],
 			self::$module.'.deactivate' => [__CLASS__, 'getDeactivate'],
 		];
 	}
 
 	public static function getActivate(GenericEvent $event) {
 		$serviceClass = $event->getSubject();
-		if ($event['category'] == SERVICE_TYPES_VMWARE) {
+		if ($event['type'] == SERVICE_TYPES_VMWARE) {
 			myadmin_log(self::$module, 'info', self::$name.' Activation', __LINE__, __FILE__);
-			function_requirements('activate_vmware');
-			activate_vmware($serviceClass->getIp(), $event['field1']);
 			$event->stopPropagation();
 		}
 	}
 
 	public static function getDeactivate(GenericEvent $event) {
-		if ($event['category'] == SERVICE_TYPES_VMWARE) {
+		if ($event['type'] == SERVICE_TYPES_VMWARE) {
 			myadmin_log(self::$module, 'info', self::$name.' Deactivation', __LINE__, __FILE__);
 			$serviceClass = $event->getSubject();
 			$GLOBALS['tf']->history->add(self::$module.'queue', $serviceClass->getId(), 'delete', '', $serviceClass->getCustid());
@@ -43,7 +42,7 @@ class Plugin {
 	}
 
 	public static function getChangeIp(GenericEvent $event) {
-		if ($event['category'] == SERVICE_TYPES_VMWARE) {
+		if ($event['type'] == SERVICE_TYPES_VMWARE) {
 			$serviceClass = $event->getSubject();
 			$settings = get_module_settings(self::$module);
 			$vmware = new Vmware(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
