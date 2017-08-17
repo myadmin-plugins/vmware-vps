@@ -102,12 +102,12 @@ class Plugin {
 		$loader->add_requirement('crud_reusable_vmware', '/../vendor/detain/crud/src/crud/crud_reusable_vmware.php');
 		$loader->add_requirement('get_vmware_licenses', '/../vendor/detain/myadmin-vmware-vps/src/vmware.inc.php');
 		$loader->add_requirement('get_vmware_list', '/../vendor/detain/myadmin-vmware-vps/src/vmware.inc.php');
-		$loader->add_requirement('vmware_licenses_list', '/../vendor/detain/myadmin-vmware-vps/src/vmware_licenses_list.php');
-		$loader->add_requirement('vmware_list', '/../vendor/detain/myadmin-vmware-vps/src/vmware_list.php');
+		$loader->add_page_requirement('vmware_licenses_list', '/../vendor/detain/myadmin-vmware-vps/src/vmware_licenses_list.php');
+		$loader->add_page_requirement('vmware_list', '/../vendor/detain/myadmin-vmware-vps/src/vmware_list.php');
 		$loader->add_requirement('get_available_vmware', '/../vendor/detain/myadmin-vmware-vps/src/vmware.inc.php');
 		$loader->add_requirement('activate_vmware', '/../vendor/detain/myadmin-vmware-vps/src/vmware.inc.php');
 		$loader->add_requirement('get_reusable_vmware', '/../vendor/detain/myadmin-vmware-vps/src/vmware.inc.php');
-		$loader->add_requirement('reusable_vmware', '/../vendor/detain/myadmin-vmware-vps/src/reusable_vmware.php');
+		$loader->add_page_requirement('reusable_vmware', '/../vendor/detain/myadmin-vmware-vps/src/reusable_vmware.php');
 		$loader->add_requirement('class.Vmware', '/../vendor/detain/vmware-vps/src/Vmware.php');
 		$loader->add_requirement('vps_add_vmware', '/vps/addons/vps_add_vmware.php');
 	}
