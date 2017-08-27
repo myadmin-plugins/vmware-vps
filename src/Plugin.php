@@ -89,7 +89,7 @@ class Plugin {
 		if ($GLOBALS['tf']->ima == 'admin') {
 			$menu->add_link(self::$module, 'choice=none.reusable_vmware', 'images/icons/database_warning_48.png', 'ReUsable Vmware Licenses');
 			$menu->add_link(self::$module, 'choice=none.vmware_list', 'images/icons/database_warning_48.png', 'Vmware Licenses Breakdown');
-			$menu->add_link(self::$module.'api', 'choice=none.vmware_licenses_list', 'whm/createacct.gif', 'List all Vmware Licenses');
+			$menu->add_link(self::$module.'api', 'choice=none.vmware_licenses_list', '/images/whm/createacct.gif', 'List all Vmware Licenses');
 		}
 	}
 
