@@ -24,5 +24,5 @@ composer require detain/myadmin-vmware-vps
 
 ## License
 
-The Vmware Vps Class class is licensed under the LGPL-v2 license.
+The Vmware Vps Class class is licensed under the LGPL-v2.1 license.
 
