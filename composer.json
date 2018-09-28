@@ -1,5 +1,5 @@
 {
-	"name": "detain/myadmin-vmware-vps",
+	"name": "detain/vmware-vps",
 	"type": "myadmin-plugin",
 	"description": "Vmware Vps Class",
 	"keywords": [
