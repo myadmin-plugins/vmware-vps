@@ -93,9 +93,9 @@ class Plugin
     {
         $menu = $event->getSubject();
         if ($GLOBALS['tf']->ima == 'admin') {
-            $menu->add_link(self::$module, 'choice=none.reusable_vmware', '/images/myadmin/to-do.png', __('ReUsable Vmware Licenses'));
-            $menu->add_link(self::$module, 'choice=none.vmware_list', '/images/myadmin/to-do.png', __('Vmware Licenses Breakdown'));
-            $menu->add_link(self::$module.'api', 'choice=none.vmware_licenses_list', '/images/whm/createacct.gif', __('List all Vmware Licenses'));
+            $menu->add_link(self::$module, 'choice=none.reusable_vmware', '/images/myadmin/to-do.png', _('ReUsable Vmware Licenses'));
+            $menu->add_link(self::$module, 'choice=none.vmware_list', '/images/myadmin/to-do.png', _('Vmware Licenses Breakdown'));
+            $menu->add_link(self::$module.'api', 'choice=none.vmware_licenses_list', '/images/whm/createacct.gif', _('List all Vmware Licenses'));
         }
     }
 
@@ -131,8 +131,8 @@ class Plugin
          * @var \MyAdmin\Settings $settings
          **/
         $settings = $event->getSubject();
-        $settings->add_text_setting(self::$module, __('Slice Costs'), 'vps_slice_vmware_cost', __('VMWare VPS Cost Per Slice'), __('VMWare VPS will cost this much for 1 slice.'), $settings->get_setting('VPS_SLICE_VMWARE_COST'));
-        //$settings->add_select_master(__(self::$module), __('Default Servers'), self::$module, 'new_vps_vmware_server', __('VMWare NJ Server'), NEW_VPS_VMWARE_SERVER, 10, 1);
-        $settings->add_dropdown_setting(self::$module, __('Out of Stock'), 'outofstock_vmware', __('Out Of Stock VMWare Secaucus'), __('Enable/Disable Sales Of This Type'), $settings->get_setting('OUTOFSTOCK_VMWARE'), ['0', '1'], ['No', 'Yes']);
+        $settings->add_text_setting(self::$module, _('Slice Costs'), 'vps_slice_vmware_cost', _('VMWare VPS Cost Per Slice'), _('VMWare VPS will cost this much for 1 slice.'), $settings->get_setting('VPS_SLICE_VMWARE_COST'));
+        //$settings->add_select_master(_(self::$module), _('Default Servers'), self::$module, 'new_vps_vmware_server', _('VMWare NJ Server'), NEW_VPS_VMWARE_SERVER, 10, 1);
+        $settings->add_dropdown_setting(self::$module, _('Out of Stock'), 'outofstock_vmware', _('Out Of Stock VMWare Secaucus'), _('Enable/Disable Sales Of This Type'), $settings->get_setting('OUTOFSTOCK_VMWARE'), ['0', '1'], ['No', 'Yes']);
     }
 }
