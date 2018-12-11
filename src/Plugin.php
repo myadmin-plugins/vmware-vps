@@ -132,7 +132,9 @@ class Plugin
          **/
         $settings = $event->getSubject();
         $settings->add_text_setting(self::$module, _('Slice Costs'), 'vps_slice_vmware_cost', _('VMWare VPS Cost Per Slice'), _('VMWare VPS will cost this much for 1 slice.'), $settings->get_setting('VPS_SLICE_VMWARE_COST'));
+        $settings->setTarget('module');
         //$settings->add_select_master(_(self::$module), _('Default Servers'), self::$module, 'new_vps_vmware_server', _('VMWare NJ Server'), NEW_VPS_VMWARE_SERVER, 10, 1);
         $settings->add_dropdown_setting(self::$module, _('Out of Stock'), 'outofstock_vmware', _('Out Of Stock VMWare Secaucus'), _('Enable/Disable Sales Of This Type'), $settings->get_setting('OUTOFSTOCK_VMWARE'), ['0', '1'], ['No', 'Yes']);
+        $settings->setTarget('global');
     }
 }
