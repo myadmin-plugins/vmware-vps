@@ -44,7 +44,7 @@ class Plugin
     {
         $serviceClass = $event->getSubject();
         if ($event['type'] == get_service_define('VMWARE')) {
-            myadmin_log(self::$module, 'info', self::$name.' Activation', __LINE__, __FILE__);
+            myadmin_log(self::$module, 'info', self::$name.' Activation', __LINE__, __FILE__, self::$module, $serviceClass->getId());
             $event->stopPropagation();
         }
     }
@@ -55,8 +55,8 @@ class Plugin
     public static function getDeactivate(GenericEvent $event)
     {
         if ($event['type'] == get_service_define('VMWARE')) {
-            myadmin_log(self::$module, 'info', self::$name.' Deactivation', __LINE__, __FILE__);
             $serviceClass = $event->getSubject();
+            myadmin_log(self::$module, 'info', self::$name.' Deactivation', __LINE__, __FILE__, self::$module, $serviceClass->getId());
             $GLOBALS['tf']->history->add(self::$module.'queue', $serviceClass->getId(), 'delete', '', $serviceClass->getCustid());
         }
     }
@@ -70,10 +70,10 @@ class Plugin
             $serviceClass = $event->getSubject();
             $settings = get_module_settings(self::$module);
             $vmware = new Vmware(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
-            myadmin_log(self::$module, 'info', 'IP Change - (OLD:'.$serviceClass->getIp().") (NEW:{$event['newip']})", __LINE__, __FILE__);
+            myadmin_log(self::$module, 'info', 'IP Change - (OLD:'.$serviceClass->getIp().") (NEW:{$event['newip']})", __LINE__, __FILE__, self::$module, $serviceClass->getId());
             $result = $vmware->editIp($serviceClass->getIp(), $event['newip']);
             if (isset($result['faultcode'])) {
-                myadmin_log(self::$module, 'error', 'Vmware editIp('.$serviceClass->getIp().', '.$event['newip'].') returned Fault '.$result['faultcode'].': '.$result['fault'], __LINE__, __FILE__, self::$module);
+                myadmin_log(self::$module, 'error', 'Vmware editIp('.$serviceClass->getIp().', '.$event['newip'].') returned Fault '.$result['faultcode'].': '.$result['fault'], __LINE__, __FILE__, self::$module, $serviceClass->getId());
                 $event['status'] = 'error';
                 $event['status_text'] = 'Error Code '.$result['faultcode'].': '.$result['fault'];
             } else {
