@@ -57,7 +57,7 @@ class Plugin
         if ($event['type'] == get_service_define('VMWARE')) {
             $serviceClass = $event->getSubject();
             myadmin_log(self::$module, 'info', self::$name.' Deactivation', __LINE__, __FILE__, self::$module, $serviceClass->getId());
-            $GLOBALS['tf']->history->add(self::$module.'queue', $serviceClass->getId(), 'delete', '', $serviceClass->getCustid());
+            \MyAdmin\App::history()->add(self::$module.'queue', $serviceClass->getId(), 'delete', '', $serviceClass->getCustid());
         }
     }
 
@@ -77,7 +77,7 @@ class Plugin
                 $event['status'] = 'error';
                 $event['status_text'] = 'Error Code '.$result['faultcode'].': '.$result['fault'];
             } else {
-                $GLOBALS['tf']->history->add($settings['TABLE'], 'change_ip', $event['newip'], $serviceClass->getId(), $serviceClass->getCustid());
+                \MyAdmin\App::history()->add($settings['TABLE'], 'change_ip', $event['newip'], $serviceClass->getId(), $serviceClass->getCustid());
                 $serviceClass->set_ip($event['newip'])->save();
                 $event['status'] = 'ok';
                 $event['status_text'] = 'The IP Address has been changed.';
@@ -92,7 +92,7 @@ class Plugin
     public static function getMenu(GenericEvent $event)
     {
         $menu = $event->getSubject();
-        if ($GLOBALS['tf']->ima == 'admin') {
+        if (\MyAdmin\App::ima() == 'admin') {
             $menu->add_link(self::$module, 'choice=none.reusable_vmware', '/images/myadmin/to-do.png', _('ReUsable Vmware Licenses'));
             $menu->add_link(self::$module, 'choice=none.vmware_list', '/images/myadmin/to-do.png', _('Vmware Licenses Breakdown'));
             $menu->add_link(self::$module.'api', 'choice=none.vmware_licenses_list', '/images/whm/createacct.gif', _('List all Vmware Licenses'));
