@@ -46,10 +46,10 @@ class PluginTest extends TestCase
     {
         parent::setUp();
         $this->reflection = new ReflectionClass(Plugin::class);
-        // Ensure $GLOBALS['tf'] has a get_service_define method for the
-        // real get_service_define() function (from myadmin-plugin-installer).
+        // Bind a tf-like stub via the App container so MyAdmin\App::tf()
+        // (and the procedural get_service_define() helper) work without DB.
         $defines = self::SERVICE_DEFINES;
-        $GLOBALS['tf'] = new class($defines) {
+        $stub = new class($defines) {
             /** @var array<string, int> */
             private array $defines;
             public string $ima = 'client';
@@ -63,6 +63,17 @@ class PluginTest extends TestCase
                 return $this->defines[$name] ?? 0;
             }
         };
+        \MyAdmin\App::setContainer(
+            \MyAdmin\App\Testing\TestContainerBuilder::make()
+                ->withTf($stub)
+                ->build()
+        );
+    }
+
+    protected function tearDown(): void
+    {
+        \MyAdmin\App::resetContainer();
+        parent::tearDown();
     }
 
     // ---------------------------------------------------------------
