@@ -540,7 +540,7 @@ class PluginTest extends TestCase
             }
         };
 
-        $GLOBALS['tf'] = $tfMock;
+        \MyAdmin\App::setContainer(\MyAdmin\App\Testing\TestContainerBuilder::make()->withTf($tfMock)->build());
 
         $event = new GenericEvent($serviceClass, ['type' => get_service_define('VMWARE')]);
         Plugin::getDeactivate($event);
@@ -585,7 +585,7 @@ class PluginTest extends TestCase
             }
         };
 
-        $GLOBALS['tf'] = $tfMock;
+        \MyAdmin\App::setContainer(\MyAdmin\App\Testing\TestContainerBuilder::make()->withTf($tfMock)->build());
 
         $serviceClass = new class {
             public function getId(): int
@@ -621,7 +621,7 @@ class PluginTest extends TestCase
         };
 
         $defines = self::SERVICE_DEFINES;
-        $GLOBALS['tf'] = new class($defines) {
+        $tfMock = new class($defines) {
             public string $ima = 'admin';
             /** @var array<string, int> */
             private array $defines;
@@ -629,6 +629,7 @@ class PluginTest extends TestCase
             public function __construct(array $defines) { $this->defines = $defines; }
             public function get_service_define(string $name): int { return $this->defines[$name] ?? 0; }
         };
+        \MyAdmin\App::setContainer(\MyAdmin\App\Testing\TestContainerBuilder::make()->withTf($tfMock)->build());
 
         $event = new GenericEvent($menu);
         Plugin::getMenu($event);
@@ -653,7 +654,7 @@ class PluginTest extends TestCase
         };
 
         $defines = self::SERVICE_DEFINES;
-        $GLOBALS['tf'] = new class($defines) {
+        $tfMock = new class($defines) {
             public string $ima = 'client';
             /** @var array<string, int> */
             private array $defines;
@@ -661,6 +662,7 @@ class PluginTest extends TestCase
             public function __construct(array $defines) { $this->defines = $defines; }
             public function get_service_define(string $name): int { return $this->defines[$name] ?? 0; }
         };
+        \MyAdmin\App::setContainer(\MyAdmin\App\Testing\TestContainerBuilder::make()->withTf($tfMock)->build());
 
         $event = new GenericEvent($menu);
         Plugin::getMenu($event);
@@ -844,8 +846,8 @@ class PluginTest extends TestCase
         $this->assertNotFalse($filename);
         $source = implode('', array_slice(file($filename), $startLine - 1, $endLine - $startLine + 1));
 
-        $this->assertStringContainsString("\$GLOBALS['tf']", $source);
-        $this->assertStringContainsString('history', $source);
+        // Phase 6: history access now goes through MyAdmin\App::history().
+        $this->assertStringContainsString('App::history()', $source);
         $this->assertStringContainsString('delete', $source);
     }
 
